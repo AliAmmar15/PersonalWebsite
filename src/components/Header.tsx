@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
@@ -27,42 +26,46 @@ const Header = () => {
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
     { id: 'education', label: 'Education' },
-    { id: 'projects', label: 'Projects' },
     { id: 'experience', label: 'Experience' },
+    { id: 'projects', label: 'Projects' },
     { id: 'skills', label: 'Skills' },
     { id: 'contact', label: 'Contact' },
   ];
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-      isScrolled ? 'bg-card/80 backdrop-blur-xl border-b border-border/50 shadow-lg' : 'bg-transparent'
+    <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+      isScrolled 
+        ? 'bg-background/80 backdrop-blur-2xl border-b border-border/50 shadow-lg' 
+        : 'bg-transparent'
     }`}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-6 lg:px-12 max-w-7xl">
         <div className="flex justify-between items-center h-16">
+          
+          {/* Logo */}
           <button
             onClick={() => scrollToSection('home')}
-            className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:from-purple-600 hover:to-blue-600 transition-all duration-300"
+            className="text-xl font-bold text-primary hover:text-primary/80 transition-all duration-300"
           >
             Ali Ammar
           </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden lg:flex items-center space-x-8">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-muted-foreground hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 transition-all duration-300 font-medium relative group"
+                className="text-muted-foreground hover:text-foreground transition-all duration-300 font-medium relative group py-2"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
               </button>
             ))}
           </nav>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 hover:bg-primary/10 rounded-lg transition-colors"
+            className="lg:hidden p-2 hover:bg-muted rounded-xl transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -71,13 +74,13 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-card/90 backdrop-blur-xl border-t border-border/50 rounded-b-lg">
-            <nav className="flex flex-col space-y-2 px-4 py-4">
+          <div className="lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-2xl border-b border-border/50 shadow-xl animate-fade-in-up">
+            <nav className="flex flex-col px-6 py-4">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-left text-muted-foreground hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 transition-all duration-300 font-medium py-2"
+                  className="text-left text-muted-foreground hover:text-foreground transition-all duration-300 font-medium py-3 border-b border-border/30 last:border-0"
                 >
                   {item.label}
                 </button>
